@@ -167,7 +167,7 @@ class UpdaterMod(loader.Module):
         self.config = loader.ModuleConfig(
             loader.ConfigValue(
                 "GIT_ORIGIN_URL",
-                "https://github.com/hikariatama/Hikka",
+                "https://github.com/VadymYem/AuthorBot",
                 lambda: self.strings("origin_cfg_doc"),
                 validator=loader.validators.Link(),
             )
@@ -236,10 +236,10 @@ class UpdaterMod(loader.Module):
             msg_obj,
             self.strings("restarting_caption").format(
                 utils.get_platform_emoji()
-                if self._client.hikka_me.premium
+                if self._client.acbot_me.premium
                 and CUSTOM_EMOJIS
                 and isinstance(msg_obj, Message)
-                else "Hikka"
+                else "acbot"
             )
             if "LAVHOST" not in os.environ
             else self.strings("lavhost_restart").format(
@@ -247,7 +247,7 @@ class UpdaterMod(loader.Module):
                 ' document_id="5193117564015747203">✌️</emoji><emoji'
                 ' document_id="5195050806105087456">✌️</emoji><emoji'
                 ' document_id="5195457642587233944">✌️</emoji><b>'
-                if self._client.hikka_me.premium
+                if self._client.acbot_me.premium
                 and CUSTOM_EMOJIS
                 and isinstance(msg_obj, Message)
                 else "lavHost"
@@ -265,7 +265,7 @@ class UpdaterMod(loader.Module):
             return
 
         with contextlib.suppress(Exception):
-            await main.hikka.web.stop()
+            await main.acbot.web.stop()
 
         atexit.register(restart, *sys.argv[1:])
         handler = logging.getLogger().handlers[0]
@@ -375,7 +375,7 @@ class UpdaterMod(loader.Module):
                         " document_id=5193117564015747203>✌️</emoji><emoji"
                         " document_id=5195050806105087456>✌️</emoji><emoji"
                         " document_id=5195457642587233944>✌️</emoji><b>"
-                        if self._client.hikka_me.premium
+                        if self._client.acbot_me.premium
                         and CUSTOM_EMOJIS
                         and isinstance(msg_obj, Message)
                         else "lavHost"
@@ -432,7 +432,7 @@ class UpdaterMod(loader.Module):
     async def _add_folder(self):
         folders = await self._client(GetDialogFiltersRequest())
 
-        if any(getattr(folder, "title", None) == "hikka" for folder in folders):
+        if any(getattr(folder, "title", None) == "acbot" for folder in folders):
             return
 
         try:
@@ -452,7 +452,7 @@ class UpdaterMod(loader.Module):
                     folder_id,
                     DialogFilter(
                         folder_id,
-                        title="hikka",
+                        title="acbot",
                         pinned_peers=(
                             [
                                 await self._client.get_input_entity(
