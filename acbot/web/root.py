@@ -306,7 +306,7 @@ class Web:
         first_session = not bool(main.acbot.clients)
 
         # Client is ready to pass in to dispatcher
-        main.acbot.clients = list(set(main.hikka.clients + [self._pending_client]))
+        main.acbot.clients = list(set(main.acbot.clients + [self._pending_client]))
         self._pending_client = None
 
         self.clients_set.set()
@@ -315,7 +315,7 @@ class Web:
             atexit.register(functools.partial(restart, *sys.argv[1:]))
             handler = logging.getLogger().handlers[0]
             handler.setLevel(logging.CRITICAL)
-            for client in main.hikka.clients:
+            for client in main.acbot.clients:
                 await client.disconnect()
 
             sys.exit(0)
@@ -400,7 +400,7 @@ class Web:
             except Exception:
                 pass
 
-        session = f"hikka_{utils.rand(16)}"
+        session = f"acbot_{utils.rand(16)}"
 
         if not ops:
             # If no auth message was sent, just leave it empty
@@ -408,7 +408,7 @@ class Web:
             # inline bot or did not authorize any sessions
             return web.Response(body=session)
 
-        if not await main.hikka.wait_for_web_auth(token):
+        if not await main.acbot.wait_for_web_auth(token):
             for op in ops:
                 await op()
             return web.Response(body="TIMEOUT")
