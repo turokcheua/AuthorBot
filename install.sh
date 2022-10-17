@@ -135,7 +135,7 @@ runout ${SUDO_CMD}git clone https://github.com/VadymYem/AuthorBot/ || {
 	errorout "Clone failed."
 	exit 3
 }
-cd Hikka || {
+cd AuthorBot || {
 	printf "\r\033[0;33mRun: \033[1;33mpkg install git\033[0;33m and restart installer"
 	exit 7
 }
