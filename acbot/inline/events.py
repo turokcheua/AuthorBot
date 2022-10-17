@@ -399,10 +399,10 @@ class Events(InlineUnit):
                 (
                     InlineQueryResultArticle(
                         id=utils.rand(20),
-                        title=f"🌘 Command «{name}»",
+                        title=f"✍️ Command «{name}»",
                         description=doc,
                         input_message_content=InputTextMessageContent(
-                            "<b>🌘 Command"
+                            "<b>✍️ Command"
                             f" «{utils.escape_html(name)}»</b>\n\n<i>{utils.escape_html(doc)}</i>",
                             "HTML",
                             disable_web_page_preview=True,
