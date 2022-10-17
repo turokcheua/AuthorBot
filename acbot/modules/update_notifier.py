@@ -87,8 +87,8 @@ class UpdateNotifierMod(loader.Module):
 
         self._markup = self.inline.generate_markup(
             [
-                {"text": "🔄 Update", "data": "hikka_update"},
-                {"text": "🚫 Ignore", "data": "hikka_upd_ignore"},
+                {"text": "🔄 Update", "data": "acbot_update"},
+                {"text": "🚫 Ignore", "data": "acbot_upd_ignore"},
             ]
         )
 
@@ -143,10 +143,10 @@ class UpdateNotifierMod(loader.Module):
     @loader.callback_handler()
     async def update(self, call: InlineCall):
         """Process update buttons clicks"""
-        if call.data not in {"hikka_update", "hikka_upd_ignore"}:
+        if call.data not in {"acbot_update", "acbotf_upd_ignore"}:
             return
 
-        if call.data == "hikka_upd_ignore":
+        if call.data == "acbot_upd_ignore":
             self.set("ignore_permanent", self.get_latest())
             await call.answer("Notifications about the latest have been suppressed")
             return
